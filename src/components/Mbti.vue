@@ -33,6 +33,12 @@
           v-for="(ten, idx) in tendency"
           :key="ten"
           class="graph__box">
+          <p
+            v-for="lTen in leftTendency[idx]"
+            :key="lTen"
+            class="box__left-tendency">
+            {{ lTen }}
+          </p>
           <div class="box__left">
             <div 
               v-for="n in mbtiTest.left[idx]"
@@ -48,6 +54,12 @@
               :key="n"
               class="right__cnt"></div>
           </div>
+          <p
+            v-for="rTen in rightTendency[idx]"
+            :key="rTen"
+            class="box__right-tendency">
+            {{ rTen }}
+          </p>
         </div>
       </div> 
     </section>
@@ -71,7 +83,9 @@ export default {
         left: [0, 0, 0, 0], // E , S , T , J
         right : [0, 0, 0, 0] // I , N , F , P
       },
-      tendency: ['energy', 'information', 'judgment', 'life'],
+      tendency: ['에너지 방향', '인식 기능', '판단 기능', '생활 양식'],
+      leftTendency: ['외향', '감각', '사고', '판단'],
+      rightTendency: ['내향', '직관', '감정', '인식'],
       MbtiTendency: '',
       results: ['', '']
     }
@@ -177,12 +191,13 @@ export default {
           justify-content: center;
           align-items: stretch;
           margin: 10px 0 10px;
+          
           .box__left {
             width: 100%;
             display: flex;
             justify-content: flex-end;
             .left__cnt {
-              width: 1rem;
+              width: 4%;
               height: 1rem;
               background-color:royalblue;
               margin-right: 1px;
@@ -191,17 +206,21 @@ export default {
           .box__explain {
             text-align: center;
             margin: 0 1rem 0;
-            width: 30%;
+            width: 300px;
           }
           .box__right {
             width: 100%;
             display: flex;
             .right__cnt {
-              width: 1rem;
+              width: 4%;
               height: 1rem;
               background-color: orange;
               margin-right: 1px;
             }
+          }
+          .box__left-tendency,
+          .box__right-tendency {
+            margin: 0 3px 0;
           }
         }
       }
