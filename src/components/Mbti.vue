@@ -22,12 +22,34 @@
     <section
       v-else
       class="result">
-      <div class="result__tendency">
+      <div class="result__MbtiTendency">
         {{ results[0] }}
       </div>
       <div class="result__explain">
         {{ results[1] }}
       </div>
+      <div class="graph">
+        <div
+          v-for="(ten, idx) in tendency"
+          :key="ten"
+          class="graph__box">
+          <div class="box__left">
+            <div 
+              v-for="n in mbtiTest.left[idx]"
+              :key="n"
+              class="left__cnt"></div>  
+          </div>
+          <p class="box__explain">
+            {{ ten }}
+          </p>
+          <div class="box__right">
+            <div 
+              v-for="n in mbtiTest.right[idx]"
+              :key="n"
+              class="right__cnt"></div>
+          </div>
+        </div>
+      </div> 
     </section>
   </section>
 </template>
@@ -46,23 +68,18 @@ export default {
       mbti,
       cnt: 0,
       mbtiTest: {
-        E: 0,
-        I: 0,
-        S: 0,
-        N: 0,
-        T: 0,
-        F: 0,
-        J: 0,
-        P: 0
+        left: [0, 0, 0, 0], // E , S , T , J
+        right : [0, 0, 0, 0] // I , N , F , P
       },
-      tendency: '',
+      tendency: ['energy', 'information', 'judgment', 'life'],
+      MbtiTendency: '',
       results: ['', '']
     }
   },
   watch: {
-    tendency(){
+    MbtiTendency(){
       for(let i = 0 ; i < this.mbti.resultsList.length ; i++){
-        if(this.tendency === this.mbti.resultsList[i].types){
+        if(this.MbtiTendency === this.mbti.resultsList[i].types){
           this.results[0] = this.mbti.resultsList[i].types
           this.results[1] = this.mbti.resultsList[i].desc
         }
@@ -70,23 +87,24 @@ export default {
     }
   },
   methods: {
-    select(type){
+    select(type){      
       switch(type){
-        case 'E': this.mbtiTest.E++; break
-        case 'I': this.mbtiTest.I++; break
-        case 'S': this.mbtiTest.S++; break
-        case 'N': this.mbtiTest.N++; break
-        case 'T': this.mbtiTest.T++; break
-        case 'F': this.mbtiTest.F++; break
-        case 'J': this.mbtiTest.J++; break
-        case 'P': this.mbtiTest.P++; break
+        case 'E': this.mbtiTest.left[0]++; break
+        case 'I': this.mbtiTest.right[0]++; break
+        case 'S': this.mbtiTest.left[1]++; break
+        case 'N': this.mbtiTest.right[1]++; break
+        case 'T': this.mbtiTest.left[2]++; break
+        case 'F': this.mbtiTest.right[2]++; break
+        case 'J': this.mbtiTest.left[3]++; break
+        case 'P': this.mbtiTest.right[3]++; break
       }
       this.cnt++
       if(this.cnt === this.mbti.questionList.length){
-        this.mbtiTest.E > this.mbtiTest.I ? this.tendency += 'E' : this.tendency += 'I'
-        this.mbtiTest.S > this.mbtiTest.N ? this.tendency += 'S' : this.tendency += 'N'
-        this.mbtiTest.T > this.mbtiTest.F ? this.tendency += 'T' : this.tendency += 'F'
-        this.mbtiTest.J > this.mbtiTest.P ? this.tendency += 'J' : this.tendency += 'P'
+        this.mbtiTest.left[0] > this.mbtiTest.right[0] ? this.MbtiTendency += 'E' : this.MbtiTendency += 'I'
+        this.mbtiTest.left[1] > this.mbtiTest.right[1] ? this.MbtiTendency += 'S' : this.MbtiTendency += 'N'
+        this.mbtiTest.left[2] > this.mbtiTest.right[2] ? this.MbtiTendency += 'T' : this.MbtiTendency += 'F'
+        this.mbtiTest.left[3] > this.mbtiTest.right[3] ? this.MbtiTendency += 'J' : this.MbtiTendency += 'P'
+
       }
       document.querySelector('.progress__box').style.width = ((this.cnt + 1) / this.mbti.questionList.length ) * 100 + '%';
 
@@ -98,7 +116,7 @@ export default {
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
   .container {
     position: absolute;
     margin: auto;
@@ -106,7 +124,7 @@ export default {
     left: 0;
     border: 1px solid tomato;
     border-radius: 10px;
-    width: 50%;
+    width: 95%;
     margin-top: 3rem;
     .progress {
       width: 100%;
@@ -143,8 +161,7 @@ export default {
       margin:1rem 0 1rem;
     }
     .result{
-
-      .result__tendency {
+      .result__MbtiTendency {
         margin-top: 1rem;
         font-size: 30px;
         text-align: center;
@@ -152,6 +169,41 @@ export default {
       }
       .result__explain {
         margin: 1rem;
+      }
+      .graph {
+        margin: 1rem 0 1rem;
+        .graph__box {
+          display: flex;
+          justify-content: center;
+          align-items: stretch;
+          margin: 10px 0 10px;
+          .box__left {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            .left__cnt {
+              width: 1rem;
+              height: 1rem;
+              background-color:royalblue;
+              margin-right: 1px;
+            }
+          }
+          .box__explain {
+            text-align: center;
+            margin: 0 1rem 0;
+            width: 30%;
+          }
+          .box__right {
+            width: 100%;
+            display: flex;
+            .right__cnt {
+              width: 1rem;
+              height: 1rem;
+              background-color: orange;
+              margin-right: 1px;
+            }
+          }
+        }
       }
     }
   }
