@@ -67,8 +67,8 @@
 </template>
 
 <script>
-// import mbti from 'assets/data.json'
-import mbti from 'assets/demodata.json'
+import mbti from 'assets/data.json'
+// import mbti from 'assets/demodata.json'
 import Btn from '~/components/Btn.vue'
 
 export default {
@@ -185,7 +185,7 @@ export default {
         margin: 1rem;
       }
       .graph {
-        margin: 1rem 0 1rem;
+        margin: 1rem;
         .graph__box {
           display: flex;
           justify-content: center;
@@ -220,7 +220,7 @@ export default {
           }
           .box__left-tendency,
           .box__right-tendency {
-            margin: 0 3px 0;
+            margin: 0 1px 0;
           }
         }
       }
