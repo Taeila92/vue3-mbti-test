@@ -67,8 +67,8 @@
 </template>
 
 <script>
-import mbti from 'assets/data.json'
-// import mbti from 'assets/demodata.json'
+// import mbti from 'assets/data.json'
+import mbti from 'assets/demodata.json'
 import Btn from '~/components/Btn.vue'
 
 export default {
@@ -164,6 +164,7 @@ export default {
         }
       }
     }
+
     .question {
       text-align: center;
       font-size: 20px;
@@ -174,6 +175,7 @@ export default {
       justify-content: center;
       margin:1rem 0 1rem;
     }
+
     .result{
       .result__MbtiTendency {
         margin-top: 1rem;
@@ -204,6 +206,7 @@ export default {
             }
           }
           .box__explain {
+            font-size: 12px;
             text-align: center;
             margin: 0 1rem 0;
             width: 300px;
