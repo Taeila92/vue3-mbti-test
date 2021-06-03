@@ -62,6 +62,9 @@
           </p>
         </div>
       </div> 
+      <Btn class="restart">
+        <a href="/">다시하기</a>
+      </Btn>
     </section>
   </section>
 </template>
@@ -177,6 +180,7 @@ export default {
     }
 
     .result{
+      position: relative;
       .result__MbtiTendency {
         margin-top: 1rem;
         font-size: 30px;
@@ -224,6 +228,18 @@ export default {
           .box__left-tendency,
           .box__right-tendency {
             margin: 0 1px 0;
+          }
+        }
+      }
+      .restart {
+        position: absolute;
+        left: 50%;
+        margin-left: calc(-5rem / 2);
+        a {
+          text-decoration: none;
+          color: white;
+          &:hover {
+            color: tomato;
           }
         }
       }

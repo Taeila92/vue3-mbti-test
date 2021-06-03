@@ -28,13 +28,11 @@ export default {
     border: 1px solid tomato;
     transition: .2s;
     box-sizing: border-box;
+    margin: 10px;
     &:hover {
       cursor: pointer;
       background-color: white;
       color: tomato;
-    }
-    &:first-child {
-      margin-right: 2rem;
     }
   }
 </style>
