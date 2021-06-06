@@ -1,16 +1,15 @@
 <template>
   <Header />
-  <Mbti />
+  <RouterView />
 </template>
 
 <script>
-import Mbti from '~/components/Mbti'
 import Header from '~/components/Header'
 
 export default {
   components: {
-    Header,
-    Mbti
+    Header
   }
 }
 </script>
+

@@ -5,7 +5,9 @@
         <p class="progress__number">
           {{ cnt + 1 }} / {{ mbti.questionList.length }}
         </p>
-        <div class="progress__box"></div>
+        <div
+          ref="progressBox"
+          class="progress__box"></div>
       </div>
       <p class="question">
         {{ mbti.questionList[cnt].q }}
@@ -23,7 +25,7 @@
       v-else
       class="result">
       <div class="result__MbtiTendency">
-        {{ results[0] }}
+        {{ user }} 님은 {{ results[0] }} 입니다.
       </div>
       <div class="result__explain">
         {{ results[1] }}
@@ -62,9 +64,10 @@
           </p>
         </div>
       </div> 
-      <Btn class="restart">
-        <a href="/">다시하기</a>
-      </Btn>
+      <a href="/">
+        <Btn class="restart">다시하기
+        </Btn>
+      </a>
     </section>
   </section>
 </template>
@@ -72,7 +75,7 @@
 <script>
 // import mbti from 'assets/data.json'
 import mbti from 'assets/demodata.json'
-import Btn from '~/components/Btn.vue'
+import Btn from '~/components/Btn'
 
 export default {
   components: {
@@ -80,6 +83,7 @@ export default {
   },
   data(){
     return {
+      userName: '',
       mbti,
       cnt: 0,
       mbtiTest: {
@@ -93,6 +97,12 @@ export default {
       results: ['', '']
     }
   },
+  props: {
+    user: {
+      type: String,
+      default: ''
+    }
+  },
   watch: {
     MbtiTendency(){
       for(let i = 0 ; i < this.mbti.resultsList.length ; i++){
@@ -100,7 +110,7 @@ export default {
           this.results[0] = this.mbti.resultsList[i].types
           this.results[1] = this.mbti.resultsList[i].desc
         }
-      }
+      } 
     }
   },
   methods: {
@@ -115,6 +125,7 @@ export default {
         case 'J': this.mbtiTest.left[3]++; break
         case 'P': this.mbtiTest.right[3]++; break
       }
+      console.log(this.userNameInput)
       this.cnt++
       if(this.cnt === this.mbti.questionList.length){
         this.mbtiTest.left[0] > this.mbtiTest.right[0] ? this.MbtiTendency += 'E' : this.MbtiTendency += 'I'
@@ -123,7 +134,8 @@ export default {
         this.mbtiTest.left[3] > this.mbtiTest.right[3] ? this.MbtiTendency += 'J' : this.MbtiTendency += 'P'
 
       }
-      document.querySelector('.progress__box').style.width = ((this.cnt + 1) / this.mbti.questionList.length ) * 100 + '%';
+      this.$refs.progressBox.style.width = ((this.cnt + 1) / this.mbti.questionList.length ) * 100 + '%'
+      // document.querySelector('.progress__box').style.width = ((this.cnt + 1) / this.mbti.questionList.length ) * 100 + '%'
 
     },
     result() {
@@ -235,13 +247,6 @@ export default {
         position: absolute;
         left: 50%;
         margin-left: calc(-5rem / 2);
-        a {
-          text-decoration: none;
-          color: white;
-          &:hover {
-            color: tomato;
-          }
-        }
       }
     }
   }
