@@ -14,9 +14,10 @@
       </p>
       <div class="container__btn">
         <Btn
+          class="active"
           @click="select(a.type[0])"
           v-for="a in mbti.questionList[cnt].a"
-          :key="a.type">
+          :key="a.answer">
           {{ a.answer }}
         </Btn>
       </div>
@@ -125,7 +126,6 @@ export default {
         case 'J': this.mbtiTest.left[3]++; break
         case 'P': this.mbtiTest.right[3]++; break
       }
-      console.log(this.userNameInput)
       this.cnt++
       if(this.cnt === this.mbti.questionList.length){
         this.mbtiTest.left[0] > this.mbtiTest.right[0] ? this.MbtiTendency += 'E' : this.MbtiTendency += 'I'
@@ -146,6 +146,24 @@ export default {
 </script>
 
 <style lang="scss" >
+@keyframes move {
+  from {
+    margin-left: 100%;
+    opacity: 0;
+  }
+  to {
+    margin-left: 0%;
+    opacity: 1;
+  }
+}
+@keyframes opac {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
   .container {
     position: absolute;
     margin: auto;
@@ -166,7 +184,7 @@ export default {
         width: 0%;
         height: 1rem;
         background-color: rgb(255, 62, 28);
-        transition: .2s;
+        transition: .4s;
         margin-right: 1rem;
         border-radius: 3px;
         box-sizing: border-box;
@@ -189,6 +207,12 @@ export default {
       align-content: center;
       justify-content: center;
       margin:1rem 0 1rem;
+      .active:first-child {
+        animation: opac .5s;
+      }
+      .active:last-child {
+        animation: move .5s ease-in-out 1 normal;
+      }
     }
 
     .result{
