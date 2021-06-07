@@ -7,7 +7,9 @@
         ref="entryName"
         type="text"
         @keyup.enter="nameEntry(), $emit('click')" />
-      <Btn @click="nameEntry(), $emit('click')">
+      <Btn
+        color="red"
+        @click="nameEntry(), $emit('click')">
         확인
       </Btn>
     </div>

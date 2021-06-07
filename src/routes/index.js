@@ -1,5 +1,4 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
-import Home from './Home'
 import MbtiTest from './MbtiTest'
 
 export default createRouter({
@@ -8,10 +7,6 @@ export default createRouter({
     {
       path: '/',
       component: MbtiTest
-    },
-    {
-      path: '/mbti',
-      component: Home
     }
 
   ]

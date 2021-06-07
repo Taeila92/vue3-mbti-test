@@ -1,5 +1,7 @@
 <template>
-  <button class="btn">
+  <button
+    :style="{ borderColor: color }"
+    class="btn">
     <slot></slot>
   </button>
 </template>
@@ -10,8 +12,11 @@ export default {
   props: {
     color: {
       type: String,
-      default: ''
+      default: 'tomato'
     }
+  },
+  mounted(){
+    console.log(this.color)
   }
 }
 </script>

@@ -26,11 +26,11 @@
       v-else
       class="result">
       <div class="result__MbtiTendency">
-        {{ user }} 님은 {{ results[0] }} 입니다.
+        {{ userName }} 님은 {{ results[0] }} 입니다.
       </div>
-      <div class="result__explain">
+      <p class="result__explain">
         {{ results[1] }}
-      </div>
+      </p>
       <div class="graph">
         <div
           v-for="(ten, idx) in tendency"
@@ -66,7 +66,8 @@
         </div>
       </div> 
       <a href="/">
-        <Btn class="restart">다시하기
+        <Btn class="restart">
+          다시하기
         </Btn>
       </a>
     </section>
@@ -84,7 +85,6 @@ export default {
   },
   data(){
     return {
-      userName: '',
       mbti,
       cnt: 0,
       mbtiTest: {
@@ -99,7 +99,7 @@ export default {
     }
   },
   props: {
-    user: {
+    userName: {
       type: String,
       default: ''
     }

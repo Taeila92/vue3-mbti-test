@@ -12,3 +12,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+p{
+  line-height: 150%;
+}
+</style>

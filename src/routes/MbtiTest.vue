@@ -3,7 +3,7 @@
     @click="nameUpdate"
     v-if="!nameOn" />
   <Mbti 
-    :user="userName"
+    :user-name="userName"
     v-else />
 </template>
 
